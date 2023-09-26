@@ -39,6 +39,9 @@ def generate():
     draw.text(((width-w)/2,(height-h)/2),quote,(255,255,255),font)
     img.save(f'Mount/output/{quote[:15].replace(" ","-")}.jpg')
 
+    os.remove(imgpath)
+    
+
 def get_files() -> list:
     """
        Retrives image and quote files for post generation
@@ -61,7 +64,14 @@ def get_files() -> list:
 ##########################    Job Scheduling     ################################ 
 
 if __name__ == '__main__':
-    generate()
+    files = True
+
+    while files:
+        generate()
+        if len(os.listdir('Mount/img')) > 0:
+            files = True
+        else:
+            files = False
     # schedule.every().day.at("07:00:00").do(generate)
 
     # while True:
