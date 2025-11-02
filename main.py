@@ -10,8 +10,22 @@ from PIL import ImageDraw
 import textwrap3
 
 def generate():
-    """
-        Generates post from picture and text file
+    """Generates an image with a quote overlay.
+
+    This function takes an image, crops it to a specific size, and overlays a randomly selected quote on it. 
+    The resulting image is then saved to the 'Mount/output' directory.
+
+    The function performs the following steps:
+    1. Retrieves an image path and a quote using the `get_files` function.
+    2. Opens and crops the image to 1080x1350 pixels.
+    3. Wraps the quote text to fit the image width.
+    4. Draws the wrapped text onto the center of the image.
+    5. Saves the final image with a filename derived from the quote.
+    6. Deletes the original image file.
+
+    Raises:
+        FileNotFoundError: If the font file 'Chiefland.ttf' is not found.
+        IOError: If there is an issue with image processing or saving.
     """
     imgpath, quote = get_files()
 
@@ -43,8 +57,18 @@ def generate():
     
 
 def get_files() -> list:
-    """
-       Retrives image and quote files for post generation
+    """Retrieves a random image path and a random quote.
+
+    This function selects a random image from the 'Mount/img' directory and a random quote from the 'Mount/quotes.txt' file.
+
+    Returns:
+        list: A list containing the following two items:
+            - str: The path to a randomly selected image file.
+            - str: A randomly selected quote.
+
+    Raises:
+        FileNotFoundError: If the 'Mount/img' directory or the 'Mount/quotes.txt' file is not found.
+        IndexError: If the 'Mount/img' directory is empty.
     """
     
     imgpath = os.listdir('Mount/img')
